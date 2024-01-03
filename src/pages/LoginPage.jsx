@@ -48,9 +48,9 @@ function RegisterPage() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ Email: email, Password: password, AreCredentialsInvalid: false }), // Convert data to JSON string
-        }).then(data => {
-            navigate(Paths.login)
-        }).catch(error => {
+        }).then(
+            navigate(Paths.login))
+        .catch(error => {
 
             console.error('There was a problem with the fetch operation:', error);
         });
