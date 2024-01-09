@@ -7,10 +7,10 @@ import Register from '../resources/register'
 import '../styles/index.css'
 import '../styles/App.css'
 import { useNavigate } from 'react-router';
-import Paths from './Paths'
 import {createFormValidation} from '../utils/createFormValidation'
-import RegexTest from "../resources/RegexTest";
+import Paths from "./Paths";
 import genericValidationMessages from "../resources/genericValidationMessages";
+import RegexTest from "../resources/RegexTest";
 function RegisterPage() {
 
     const navigate = useNavigate();
@@ -144,7 +144,7 @@ function RegisterPage() {
                     variant = "contained"
                     color = "success"
                     type="submit"
-                    disabled = {!isSubmitDisabled}
+                    disabled = {isSubmitDisabled}
                     >
                     Submit
                 </Button>

@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import Paths from './pages/Paths'
 import RegisterPage  from './pages/RegisterPage';
 import LoginPage  from './pages/LoginPage';
+import AddCampsitePage from './pages/AddCampsitePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CampsitesPage from './pages/CampsitesPage'; 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,6 +19,7 @@ root.render(
         <Route path={Paths.register} element={<RegisterPage />} />
         <Route path={Paths.login} element={<LoginPage />} />
         <Route path={Paths.campsites} element={<CampsitesPage />} />
+        <Route path={Paths.addCampsite} element={<AddCampsitePage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

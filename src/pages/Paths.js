@@ -1,6 +1,7 @@
 export default {
     register: "/register",
     login: "/login",
-    campsites: '/campsites'
+    campsites: '/campsites',
+    addCampsite: '/addCampsite'
   }
   

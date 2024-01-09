@@ -4,7 +4,12 @@ export default class Campsites {
        name: "Nume",
        description: "Descriere",
        difficulty: "Dificultate",
-       rating: "Rating"
+       rating: "Rating",
+       addCampsite: "Adaugă un campsite nou",
+       latitude: "Latitudine",
+       longitude: "Longitudine",
+       coordinatesError: "Coordonatele introduse nu sunt corecte"
+
     }
 }
   

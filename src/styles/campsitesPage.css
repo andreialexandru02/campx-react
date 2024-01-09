@@ -1,23 +1,30 @@
 .page-container {
-    display: flex;
-    width: 100%;
-    min-height: 100vh;
-  }
-  
-  .map {
-    
-    margin-top: auto;
-    flex: 1;
-    padding: 16px; /* Optional: Add padding for spacing */
-   
-  }
-  
-  .table {
-    margin-top: auto;
-    flex: 1;
-    padding: 16px; /* Optional: Add padding for spacing */
-    max-height: 800px;
-    overflow: auto;
-    transition: max-height 0.3s ease;
-  }
-  
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.map {
+
+  margin-top: auto;
+  flex: 1;
+  padding: 16px;
+  /* Optional: Add padding for spacing */
+
+}
+
+.table {
+  margin-top: auto;
+  flex: 1;
+  padding: 16px;
+  /* Optional: Add padding for spacing */
+  max-height: 800px;
+  overflow: auto;
+  transition: max-height 0.3s ease;
+}
+
+.add-button {
+  margin-top: 30px;
+  padding: 30px;
+  background-color: red;
+}

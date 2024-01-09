@@ -11,5 +11,7 @@ export default class RegexTest {
     static isFloatBetweenZeroAndHundred = (value) => /^(100(?:\.0{1,2})?|\d{0,2}(?:\.\d{0,2})?)$/.test(value)
     static romanianPostalCode = (value) => /^\d{6}$/.test(value)
     static email = (value) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)
+    static coordinates = (value) => /^-?([0-8]?[0-9]|90)(\.[0-9]{1,10})$/.test(value)
+
 
 }

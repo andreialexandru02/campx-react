@@ -41,15 +41,17 @@ function RegisterPage() {
     useEffect(() => {
         handleDisableSubmitButton();
     }, [email, password])
-    const handeSubmitClick = () => {
+    const handeSubmitClick = (e) => {
+        e.preventDefault();
         fetch('https://localhost:7118/CamperAccount/Login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ Email: email, Password: password, AreCredentialsInvalid: false }), // Convert data to JSON string
+            body: JSON.stringify({ email, password, areCredentialsInvalid: false }), // Convert data to JSON string
         }).then(
-            navigate(Paths.login))
+            // navigate(Paths.login))
+        )
         .catch(error => {
 
             console.error('There was a problem with the fetch operation:', error);
@@ -66,6 +68,9 @@ function RegisterPage() {
                             onChange={e => {
                                 setEmail(e.target.value)
                             }}
+                            required
+                            error={emailError !== ''}
+                            helperText={emailError}
                         />
                     </div>
                     <div className="form-group">
@@ -75,6 +80,9 @@ function RegisterPage() {
                             onChange={e => {
                                 setPassword(e.target.value)
                             }}
+                            required
+                            error={passwordError !== ''}
+                            helperText={passwordError}
                         />
                     </div>
                     <Button onClick={handeSubmitClick}
