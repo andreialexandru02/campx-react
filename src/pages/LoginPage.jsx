@@ -9,13 +9,16 @@ import '../styles/App.css'
 import { createFormValidation } from '../utils/createFormValidation'
 import RegexTest from "../resources/RegexTest";
 import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { login } from '../store/authSlice';
+
 import Paths from './Paths'
 function RegisterPage() {
 
 
 
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
 
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(false)
     const [email, setEmail] = useState('')
@@ -48,8 +51,17 @@ function RegisterPage() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, password, areCredentialsInvalid: false }), // Convert data to JSON string
-        }).then(
+            body: JSON.stringify({ email, password}), // Convert data to JSON string           
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json(); // Parse the response body as JSON
+        })
+        .then((camper) =>{
+            dispatch(login(camper));
+            navigate(Paths.campsites)
+        } 
             // navigate(Paths.login))
         )
         .catch(error => {

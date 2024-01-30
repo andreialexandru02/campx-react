@@ -74,9 +74,10 @@ function AddCampsitesPage() {
       setCoordinates([{ id: 1, latitude: latitude, longitude: longitude }])
     }
   }, [latitude, longitude])
+  //console.log(coordinates? coordinates[0].latitude : 45.9443);
   return (
     <>
-      <LeafletMap latitude={45.9443} longitude={25.0094} zoom={7} height="500px" width="50%" coordinates={coordinates} onMapClick={handleMapClick} />
+      <LeafletMap latitude={coordinates? coordinates[0].latitude : 45.9443} longitude={coordinates ? coordinates[0].longitude : 25.0094} zoom={7} height="500px" width="50%" coordinates={coordinates} onMapClick={handleMapClick} />
       <Card variant="outlined" className="card-container" >
         <CardContent>
           <form>
@@ -87,7 +88,7 @@ function AddCampsitesPage() {
                 onChange={e => {
                   setName(e.target.value)
                 }}
-                required
+                required 
                 error={nameError != ""}
                 helperText={nameError}
               />

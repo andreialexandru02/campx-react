@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 
 import {
@@ -9,18 +9,11 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  Stack,
-  Pagination,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
   Card,
   CardContent,
   CircularProgress
 
 } from "@mui/material";
-import Register from '../resources/register'
 import '../styles/index.css'
 import '../styles/App.css'
 import { useNavigate } from 'react-router';
@@ -28,7 +21,8 @@ import Paths from './Paths'
 import Campsites from '../resources/campsites'
 import '../styles/campsitesPage.css'
 import LeafletMap from "../components/LeafletMap";
-import { map } from "leaflet";
+import { useSelector } from 'react-redux';
+
 function CampsitesPage() {
 
   const [campsites, setCampsites] = useState()
@@ -36,7 +30,10 @@ function CampsitesPage() {
   const [isLoadingTable, setIsLoadingTable] = useState(true)
   const [isLoadingMap, setIsLoadingMap] = useState(true)
   const navigate = useNavigate();
+  const timeoutIdRef = useRef(null);
 
+  console.log(useSelector((state) => state.auth.camper))
+  
   const fetchData = () => {
     fetch('https://localhost:7118/Map/ShowMap')
       .then(response => response.json())
@@ -46,26 +43,38 @@ function CampsitesPage() {
       })
       .catch(error => console.error('Error:', error));
   }
-  const fetchCoordinates = (campsiteId = null) => {
+  const fetchCoordinates = (campsiteId = 0) => {
     fetch('https://localhost:7118/Map/DisplayCampsites')
       .then(response => response.json())
       .then(data => {
         if(campsiteId){
           data.map(campsite =>{
             if(campsite.id == campsiteId){
-              console.log(campsite)
-            //  setCoordinates(campsite)
               setCoordinates([campsite])
             }
           })
         }
-        setCoordinates(data)
+        else{
+          setCoordinates(data)
+        }
         setIsLoadingMap(false)
       })
       .catch(error => console.error('Error:', error));
   }
-  useEffect(() => fetchCoordinates, [])
+  useEffect(() => fetchCoordinates(), [])
   useEffect(() => fetchData, [campsites])
+
+  const handleMouseLeave = () => {
+
+    clearTimeout(timeoutIdRef.current);
+
+    const newTimeoutId = setTimeout(() => {
+      fetchCoordinates()
+    }, 100);
+
+    timeoutIdRef.current = newTimeoutId
+  };
+
   return (
     <>
       <Button variant="contained" className="add-button" color="success" onClick = {() =>  navigate(Paths.addCampsite)}>
@@ -97,9 +106,11 @@ function CampsitesPage() {
                               <TableRow
                                 key={c.id}
                                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                onMouseEnter={() =>  fetchCoordinates(c.id)}
-                                onMouseLeave={fetchCoordinates}>
-                              
+                                onMouseEnter={() => {clearTimeout(timeoutIdRef.current); fetchCoordinates(c.id)}}
+                                onMouseLeave={handleMouseLeave}
+                                onClick= {() => navigate(`${Paths.campsiteDetails}/${c.id}`)}
+                                >
+                                  
                                 <TableCell align="center" component="th" scope="row">{c.name}</TableCell>
                                 <TableCell align="center">{c.description}</TableCell>
                                 <TableCell align="center"> {c.difficulty}</TableCell> 
