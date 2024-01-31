@@ -8,6 +8,7 @@ export default class Register {
         lastName: "Nume",
         birthday: "Data nașterii",
         invalidEmail: 'Invalid Email'
+        
     }
 }
   

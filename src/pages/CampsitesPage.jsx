@@ -22,7 +22,7 @@ import Campsites from '../resources/campsites'
 import '../styles/campsitesPage.css'
 import LeafletMap from "../components/LeafletMap";
 import { useSelector } from 'react-redux';
-
+import Navbar from "../components/Navbar";
 function CampsitesPage() {
 
   const [campsites, setCampsites] = useState()
@@ -32,29 +32,48 @@ function CampsitesPage() {
   const navigate = useNavigate();
   const timeoutIdRef = useRef(null);
 
-  console.log(useSelector((state) => state.auth.camper))
-  
-  const fetchData = () => {
-    fetch('https://localhost:7118/Map/ShowMap')
-      .then(response => response.json())
-      .then(data => {
-        setCampsites(data)
-        setIsLoadingTable(false)
-      })
-      .catch(error => console.error('Error:', error));
-  }
+  const currentCamper = useSelector((state) => state.auth.camper)
+
+  console.log(currentCamper);
+  // useEffect(()=>{
+  //   if(currentCamper == null)
+  //   {
+  //     navigate(Paths.login)
+  //   }
+  // },[])
+  const fetchData = async () => {
+      
+      const token = currentCamper?.jwtToken
+      const response = await fetch('https://localhost:7118/Map/ShowMap', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'authentication': token,
+        },
+      });
+
+      if (!response.ok) {
+        navigate(Paths.login)
+      }
+      else {
+        const data = await response.json();
+        setCampsites(data);
+        setIsLoadingTable(false);
+
+      }
+  };
   const fetchCoordinates = (campsiteId = 0) => {
     fetch('https://localhost:7118/Map/DisplayCampsites')
       .then(response => response.json())
       .then(data => {
-        if(campsiteId){
-          data.map(campsite =>{
-            if(campsite.id == campsiteId){
+        if (campsiteId) {
+          data.map(campsite => {
+            if (campsite.id == campsiteId) {
               setCoordinates([campsite])
             }
           })
         }
-        else{
+        else {
           setCoordinates(data)
         }
         setIsLoadingMap(false)
@@ -62,7 +81,7 @@ function CampsitesPage() {
       .catch(error => console.error('Error:', error));
   }
   useEffect(() => fetchCoordinates(), [])
-  useEffect(() => fetchData, [campsites])
+  useEffect(() => fetchData ,[])
 
   const handleMouseLeave = () => {
 
@@ -77,7 +96,8 @@ function CampsitesPage() {
 
   return (
     <>
-      <Button variant="contained" className="add-button" color="success" onClick = {() =>  navigate(Paths.addCampsite)}>
+      <Navbar isLoggedIn={currentCamper} />
+      <Button variant="contained" className="add-button" color="success" onClick={() => navigate(Paths.addCampsite)}>
         {Campsites.Resources.addCampsite}
       </Button>
       <div className="page-container">
@@ -106,14 +126,14 @@ function CampsitesPage() {
                               <TableRow
                                 key={c.id}
                                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                                onMouseEnter={() => {clearTimeout(timeoutIdRef.current); fetchCoordinates(c.id)}}
+                                onMouseEnter={() => { clearTimeout(timeoutIdRef.current); fetchCoordinates(c.id) }}
                                 onMouseLeave={handleMouseLeave}
-                                onClick= {() => navigate(`${Paths.campsiteDetails}/${c.id}`)}
-                                >
-                                  
+                                onClick={() => navigate(`${Paths.campsiteDetails}/${c.id}`)}
+                              >
+
                                 <TableCell align="center" component="th" scope="row">{c.name}</TableCell>
                                 <TableCell align="center">{c.description}</TableCell>
-                                <TableCell align="center"> {c.difficulty}</TableCell> 
+                                <TableCell align="center"> {c.difficulty}</TableCell>
                                 <TableCell align="center">{c.rating} </TableCell>
                               </TableRow>
                             </>

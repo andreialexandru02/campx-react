@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Alert } from "@mui/material";
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Register from '../resources/register'
@@ -11,7 +11,7 @@ import RegexTest from "../resources/RegexTest";
 import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { login } from '../store/authSlice';
-
+import General from "../resources/general";
 import Paths from './Paths'
 function RegisterPage() {
 
@@ -29,7 +29,7 @@ function RegisterPage() {
 
     const [emailError, setEmailError] = useState('')
     const [passwordError, setPasswordError] = useState('')
-
+    const [areCredeantialsInvalid, setAreCredeantialsInvalid] = useState(false)
 
     const isValidRequiredEmail = createFormValidation(setEmailError)
     const isValidEmail = createFormValidation(setEmailError, Register.Resources.invalidEmail, RegexTest.email)
@@ -54,7 +54,10 @@ function RegisterPage() {
             body: JSON.stringify({ email, password}), // Convert data to JSON string           
         }).then(response => {
             if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+                setAreCredeantialsInvalid(true)
+            }
+            else{
+                setAreCredeantialsInvalid(false)
             }
             return response.json(); // Parse the response body as JSON
         })
@@ -97,13 +100,14 @@ function RegisterPage() {
                             helperText={passwordError}
                         />
                     </div>
+                    {areCredeantialsInvalid && <Alert severity="warning">{General.Form.invalidCredeantials}</Alert> }
                     <Button onClick={handeSubmitClick}
                         variant="contained"
                         color="success"
                         type="submit"
                         disabled={isSubmitDisabled}
                     >
-                        Submit
+                        {General.Form.submit}
                     </Button>
                 </form>
             </CardContent>
