@@ -1,0 +1,25 @@
+.campX-logo {
+    width: 80%;
+    margin-top: 100px;
+    margin-bottom: 40px;
+    display: block;
+}
+body {
+    background-image: url("../Images/ShowTripsBG.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+.home-page-container{
+    margin-left:auto;
+    margin-right:auto;
+    height:auto; 
+    width:auto;
+}
+.campsites-button{
+    
+    display: block;
+    font-size: 100px;
+    margin: auto;
+    border-radius: 30px;
+}

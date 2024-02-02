@@ -11,5 +11,8 @@ export default class General {
         submit: 'Submit',
         invalidCredeantials: "Invalid credeantials"
     }
+    static Homepage = {
+        campsitesButton: "Campsites"
+    }
 }
   

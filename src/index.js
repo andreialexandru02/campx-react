@@ -12,6 +12,7 @@ import AddCampsitePage from './pages/AddCampsitePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CampsitesPage from './pages/CampsitesPage';
 import CampsiteDetailsPage from './pages/CampsiteDetailsPage'
+import HomePage from './pages/HomePage';
 
 import { Provider } from 'react-redux'
 import store from './store'
@@ -21,6 +22,7 @@ root.render(
     <React.StrictMode>
       <BrowserRouter>
         <Routes>
+          <Route path={Paths.homePage} element={<HomePage />} />
           <Route path={Paths.register} element={<RegisterPage />} />
           <Route path={Paths.login} element={<LoginPage />} />
           <Route path={Paths.campsites} element={<CampsitesPage />} />

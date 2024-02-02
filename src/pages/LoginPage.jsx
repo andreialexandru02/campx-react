@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../store/authSlice';
 import General from "../resources/general";
 import Paths from './Paths'
-function RegisterPage() {
+function LoginPage() {
 
 
 
@@ -63,7 +63,7 @@ function RegisterPage() {
         })
         .then((camper) =>{
             dispatch(login(camper));
-            navigate(Paths.campsites)
+            navigate(Paths.homePage)
         } 
             // navigate(Paths.login))
         )
@@ -114,4 +114,4 @@ function RegisterPage() {
         </Card>
     )
 }
-export default RegisterPage;
+export default LoginPage;
