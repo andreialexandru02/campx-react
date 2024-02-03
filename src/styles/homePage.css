@@ -8,7 +8,7 @@ body {
     background-image: url("../Images/ShowTripsBG.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 .home-page-container{
     margin-left:auto;
@@ -17,9 +17,13 @@ body {
     width:auto;
 }
 .campsites-button{
-    
+    background-color: green;
     display: block;
     font-size: 100px;
     margin: auto;
+    border: none;
+    padding: 20px;
+    color: white;
     border-radius: 30px;
 }
+ 

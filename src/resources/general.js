@@ -14,5 +14,8 @@ export default class General {
     static Homepage = {
         campsitesButton: "Campsites"
     }
+    static Erorrs = {
+        unauthorized: "UnauthorizedAction"
+    }
 }
   

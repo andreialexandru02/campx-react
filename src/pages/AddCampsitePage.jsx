@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router';
 import Paths from "./Paths"
 import { createFormValidation } from '../utils/createFormValidation'
 import RegexTest from "../resources/RegexTest";
+import { useSelector } from 'react-redux';
 import {
   Button,
   TextField,
@@ -19,7 +20,7 @@ import {
 
 } from "@mui/material";
 function AddCampsitesPage() {
-
+  const currentCamper = useSelector((state) => state.auth.camper)
   const navigate = useNavigate();
   const [coordinates, setCoordinates] = useState(null)
   const [name, setName] = useState(null)
@@ -27,7 +28,7 @@ function AddCampsitesPage() {
   const [difficulty, setDifficulty] = useState(1)
   const [latitude, setLatitude] = useState("")
   const [longitude, setLongitude] = useState("")
-  const camperId = 2;
+  const camperId = currentCamper.id;
   const rating = 0;
   const images = null;
   const [isSubminDisabled, setIsSubminDisabled] = useState(true)

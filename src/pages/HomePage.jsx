@@ -16,9 +16,8 @@ function HomePage() {
             <Navbar isLoggedIn={currentCamper} />
             <div className="home-page-container">
                 <img className="campX-logo" src={CampXLogo} alt="img" />
-                <Button onClick={navigate(Paths.campsites)} className="campsites-button" variant="contained" color="success">{General.Homepage.campsitesButton}</Button>
+                <button onClick={() => navigate(Paths.campsites)} className="campsites-button" variant="contained" color="success">{General.Homepage.campsitesButton}</button>
             </div>
-
         </>
     )
 }

@@ -97,9 +97,10 @@ function CampsitesPage() {
   return (
     <>
       <Navbar isLoggedIn={currentCamper} />
+      {currentCamper &&
       <Button variant="contained" className="add-button" color="success" onClick={() => navigate(Paths.addCampsite)}>
         {Campsites.Resources.addCampsite}
-      </Button>
+      </Button> }
       <div className="page-container">
         <div className="map">
           {isLoadingTable ? <CircularProgress /> : <LeafletMap latitude={45.9443} longitude={25.0094} zoom={7} height="700px" width="100%" coordinates={coordinates} />}

@@ -1,0 +1,14 @@
+.campsites-details-card{
+    text-align: center;
+    width: fit-content;
+    font-size: 3vh;
+}
+.edit-delete-buttons-div{
+    padding: 5px 10px 10px 0px;
+    display: flex;
+    flex-direction: column;
+width: fit-content;    
+}
+.edit-delete-buttons-div button{
+    font-size: 20px;
+}
