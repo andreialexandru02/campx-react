@@ -29,6 +29,9 @@ const Navbar = ({ isLoggedIn }) => {
             <Button color="inherit" onClick={() => navigate(Paths.register)}>
              {GeneralResources.Navbar.register}
             </Button>
+            <Button color="inherit" onClick={() => navigate(Paths.homePage)}>
+             {GeneralResources.Navbar.home}
+            </Button>
           </>
         )}
       </Toolbar>

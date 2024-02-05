@@ -5,6 +5,7 @@ export default class General {
         login: "Login",
         register: "Register",
         logout: "Logout",
+        home: "Home"
         
     }
     static Form ={

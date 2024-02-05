@@ -35,12 +35,6 @@ function CampsitesPage() {
   const currentCamper = useSelector((state) => state.auth.camper)
 
   console.log(currentCamper);
-  // useEffect(()=>{
-  //   if(currentCamper == null)
-  //   {
-  //     navigate(Paths.login)
-  //   }
-  // },[])
   const fetchData = async () => {
       
       const token = currentCamper?.jwtToken
@@ -80,8 +74,7 @@ function CampsitesPage() {
       })
       .catch(error => console.error('Error:', error));
   }
-  // useEffect(() => {
-  // }, [])
+
   useEffect(() => {
     fetchCoordinates()
     fetchData()

@@ -7,8 +7,8 @@ export default class Register {
         firstName: "Prenume",
         lastName: "Nume",
         birthday: "Data nașterii",
-        invalidEmail: 'Email invalid'
-        
+        invalidEmail: 'Email invalid',
+        serverError: "A apărut o eroare!"
     }
 }
   

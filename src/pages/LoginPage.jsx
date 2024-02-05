@@ -14,6 +14,7 @@ import { login } from '../store/authSlice';
 import General from "../resources/general";
 import Paths from './Paths'
 import { useSelector } from 'react-redux';
+import Navbar from "../components/Navbar";
 function LoginPage() {
 
 
@@ -25,7 +26,6 @@ function LoginPage() {
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    console.log(currentCamper);
 
 
 
@@ -53,67 +53,70 @@ function LoginPage() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, password}), // Convert data to JSON string           
+            body: JSON.stringify({ email, password }), // Convert data to JSON string           
         }).then(response => {
             if (!response.ok) {
                 setAreCredeantialsInvalid(true)
             }
-            else{
+            else {
                 setAreCredeantialsInvalid(false)
             }
             return response.json(); // Parse the response body as JSON
         })
-        .then((camper) =>{
-            dispatch(login(camper));
-            navigate(Paths.homePage)
-        } 
-            // navigate(Paths.login))
-        )
-        .catch(error => {
+            .then((camper) => {
+                dispatch(login(camper));
+                navigate(Paths.homePage)
+            }
+                // navigate(Paths.login))
+            )
+            .catch(error => {
 
-            console.error('There was a problem with the fetch operation:', error);
-        });
+                console.error('There was a problem with the fetch operation:', error);
+            });
     }
     return (
-        <Card variant="outlined" className="card-container">
-            <CardContent>
-                <form>
-                    <div className="form-group">
-                        <TextField
-                            type="email"
-                            label={Register.Resources.email}
-                            onChange={e => {
-                                setEmail(e.target.value)
-                            }}
-                            required
-                            error={emailError !== ''}
-                            helperText={emailError}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <TextField
-                            type="password"
-                            label={Register.Resources.password}
-                            onChange={e => {
-                                setPassword(e.target.value)
-                            }}
-                            required
-                            error={passwordError !== ''}
-                            helperText={passwordError}
-                        />
-                    </div>
-                    {areCredeantialsInvalid && <Alert severity="warning">{General.Form.invalidCredeantials}</Alert> }
-                    <Button onClick={handeSubmitClick}
-                        variant="contained"
-                        color="success"
-                        type="submit"
-                        disabled={isSubmitDisabled}
-                    >
-                        {General.Form.submit}
-                    </Button>
-                </form>
-            </CardContent>
-        </Card>
+        <>
+             <Navbar isLoggedIn={currentCamper} />
+            <Card variant="outlined" className="card-container">
+                <CardContent>
+                    <form>
+                        <div className="form-group">
+                            <TextField
+                                type="email"
+                                label={Register.Resources.email}
+                                onChange={e => {
+                                    setEmail(e.target.value)
+                                }}
+                                required
+                                error={emailError !== ''}
+                                helperText={emailError}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <TextField
+                                type="password"
+                                label={Register.Resources.password}
+                                onChange={e => {
+                                    setPassword(e.target.value)
+                                }}
+                                required
+                                error={passwordError !== ''}
+                                helperText={passwordError}
+                            />
+                        </div>
+                        {areCredeantialsInvalid && <Alert severity="warning">{General.Form.invalidCredeantials}</Alert>}
+                        <Button onClick={handeSubmitClick}
+                            variant="contained"
+                            color="success"
+                            type="submit"
+                            disabled={isSubmitDisabled}
+                        >
+                            {General.Form.submit}
+                        </Button>
+                    </form>
+                </CardContent>
+            </Card>
+        </>
     )
 }
 export default LoginPage;
