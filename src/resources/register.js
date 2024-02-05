@@ -7,7 +7,7 @@ export default class Register {
         firstName: "Prenume",
         lastName: "Nume",
         birthday: "Data nașterii",
-        invalidEmail: 'Invalid Email'
+        invalidEmail: 'Email invalid'
         
     }
 }

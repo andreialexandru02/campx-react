@@ -9,13 +9,13 @@ export default class General {
     }
     static Form ={
         submit: 'Submit',
-        invalidCredeantials: "Invalid credeantials"
+        invalidCredeantials: "Credeanțiale invalide!"
     }
     static Homepage = {
         campsitesButton: "Campsites"
     }
     static Erorrs = {
-        unauthorized: "UnauthorizedAction"
+        unauthorized: "Acțiune neuatorizată!"
     }
 }
   

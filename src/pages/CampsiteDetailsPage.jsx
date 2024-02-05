@@ -34,6 +34,7 @@ const CampsiteDetailsPage = () => {
     const { id } = useParams();
     const [campsite, setCampsite] = useState()
     const [isLoading, setIsLoading] = useState(true)
+
     const fetchCampiste = async () => {
         const token = currentCamper?.jwtToken
         const response = await fetch(`https://localhost:7118/Map/CampsiteDetails/${id}`, {
@@ -45,7 +46,7 @@ const CampsiteDetailsPage = () => {
         });
 
         if (!response.ok) {
-            navigate(Paths.login)
+            navigate(Paths.login)    
         }
         else {
             const data = await response.json();
@@ -54,7 +55,10 @@ const CampsiteDetailsPage = () => {
         }
     }
 
-   useEffect(() => fetchCampiste, [])
+   useEffect(() => {
+    fetchCampiste()
+    }, [])
+
     const handleDelete = () => {
         const isConfirmed = window.confirm('Are you sure you want to delete?');
         if (isConfirmed) {
@@ -77,7 +81,6 @@ const CampsiteDetailsPage = () => {
         }
         else {
             navigate(Paths.campsites)
-
         }
     }
     return (

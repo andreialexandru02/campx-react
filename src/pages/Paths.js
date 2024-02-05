@@ -3,7 +3,7 @@ export default {
     login: "/login",
     campsites: '/campsites',
     addCampsite: '/campsites/add',
-    campsiteDetails: '/campsites/details',
+    campsiteDetails: '/campsites_details',
     homePage: '/'
   }
   

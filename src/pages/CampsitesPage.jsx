@@ -80,8 +80,12 @@ function CampsitesPage() {
       })
       .catch(error => console.error('Error:', error));
   }
-  useEffect(() => fetchCoordinates(), [])
-  useEffect(() => fetchData ,[])
+  // useEffect(() => {
+  // }, [])
+  useEffect(() => {
+    fetchCoordinates()
+    fetchData()
+  }, [])
 
   const handleMouseLeave = () => {
 
@@ -129,7 +133,12 @@ function CampsitesPage() {
                                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                                 onMouseEnter={() => { clearTimeout(timeoutIdRef.current); fetchCoordinates(c.id) }}
                                 onMouseLeave={handleMouseLeave}
-                                onClick={() => navigate(`${Paths.campsiteDetails}/${c.id}`)}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  navigate(`${Paths.campsiteDetails}/${c.id}`)
+
+                                }}
                               >
 
                                 <TableCell align="center" component="th" scope="row">{c.name}</TableCell>

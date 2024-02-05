@@ -13,17 +13,19 @@ import { useDispatch } from 'react-redux';
 import { login } from '../store/authSlice';
 import General from "../resources/general";
 import Paths from './Paths'
+import { useSelector } from 'react-redux';
 function LoginPage() {
 
 
 
+    const currentCamper = useSelector((state) => state.auth.camper)
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
+    console.log(currentCamper);
 
 
 
